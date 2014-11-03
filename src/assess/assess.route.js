@@ -37,7 +37,8 @@ routes.publish = function (router) {
         getAssessment(request, response).then(function (assessment) {
             var submittedCode = request.body.code;
             var options = {
-                url: 'http://localhost:5020/v1/',
+                //url: 'http://localhost:5020/v1/',
+                url: 'http://54.171.154.216:5020/v1/',
                 method: 'POST',
                 body: [
                     JSON.stringify({
@@ -55,7 +56,7 @@ routes.publish = function (router) {
                     submissionResponse.body.read().then(function (body) {
                         response
                             .status(submissionResponse.status)
-                            .send(body);
+                            .json(JSON.parse(body));
                     });
                 });
         });

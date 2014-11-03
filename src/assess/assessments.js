@@ -6,7 +6,7 @@ var assessments = {};
 
 var data = {};
 
-var DATA_URL = 'https://dl.dropboxusercontent.com/u/1278945/code-grader/assessments-java.json';
+var DATA_URL = 'https://dl.dropboxusercontent.com/u/1278945/code-assessments-static/java.json';
 
 var loadData = function () {
     var options = {
