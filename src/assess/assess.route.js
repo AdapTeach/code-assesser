@@ -25,8 +25,8 @@ routes.publish = function (router) {
             .then(function (assessment) {
                 var compilationUnits = request.body.compilationUnits;
                 var options = {
-                    url: 'http://localhost:5020/v1/',
-                    //url: 'http://54.171.154.216:5020/v1/',
+                    //url: 'http://localhost:5020/v1/',
+                    url: 'http://54.171.154.216:5020/v1/',
                     method: 'POST',
                     body: [
                         JSON.stringify({

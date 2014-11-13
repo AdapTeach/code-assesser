@@ -11,9 +11,9 @@ var validate = function (assessment) {
         validator.isLength(assessment.instructions, 10),
         iz(assessment.providedCompilationUnits).anArray().required().valid,
         iz(assessment.compilationUnitsToSubmit).anArray().minLength(1).valid,
+        iz(assessment.tests).anArray().minLength(1).valid,
         iz(assessment.tips).anArray().required().valid,
-        iz(assessment.guides).anArray().required().valid,
-        iz(assessment.tests).anArray().minLength(1).valid
+        iz(assessment.guides).anArray().required().valid
     ];
     // TODO Validate each individual element in arrays
     // validator.contains(assessment.startCode, 'public class ' + assessment.className + ' {'),
