@@ -3,18 +3,21 @@ var validator = require('validator'),
 
 var assessmentValidator = {};
 
-var validateSingle = function (assessment) {
+var validate = function (assessment) {
     var toReturn = true;
     var results = [
         validator.isLength(assessment.id, 2),
         validator.isLength(assessment.title, 2),
         validator.isLength(assessment.instructions, 10),
-        validator.isLength(assessment.className, 2),
-        validator.contains(assessment.startCode, 'public class ' + assessment.className + ' {'),
-        iz(assessment.tests).anArray().minLength(1).valid,
-        iz(assessment.tips).anArray().valid,
-        iz(assessment.guides).anArray().valid
+        iz(assessment.providedCompilationUnits).anArray().required().valid,
+        iz(assessment.compilationUnitsToSubmit).anArray().minLength(1).valid,
+        iz(assessment.tips).anArray().required().valid,
+        iz(assessment.guides).anArray().required().valid,
+        iz(assessment.tests).anArray().minLength(1).valid
     ];
+    // TODO Validate each individual element in arrays
+    // validator.contains(assessment.startCode, 'public class ' + assessment.className + ' {'),
+    // validator.isLength(assessment.className, 2)
     results.forEach(function (result) {
         if (!result) {
             //console.log(results);
@@ -24,10 +27,12 @@ var validateSingle = function (assessment) {
     return toReturn;
 };
 
-assessmentValidator.validate = function (assessments) {
+assessmentValidator.validate = validate;
+
+assessmentValidator.validateAll = function (assessments) {
     var result = true;
     assessments.forEach(function (assessment) {
-        if (!validateSingle(assessment)) {
+        if (!validate(assessment)) {
             result = false;
         }
     });
