@@ -32,10 +32,10 @@ module.exports = function () {
         app.locals.cache = 'memory';
     }
 
-    app.use(bodyParser.json());
-//    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.json({type: 'json'}));
+    app.use(bodyParser.json({type: 'text'}));
+    //app.use(bodyParser.urlencoded({ extended: true }));
     app.use(methodOverride());
-
 
     app.disable('x-powered-by');
 
