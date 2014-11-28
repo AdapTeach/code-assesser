@@ -1,5 +1,7 @@
+var http = require('q-io/http');
+
 var assessmentData = require('./assessments'),
-    http = require("q-io/http");
+    HttpError = require('../error/HttpError');
 
 var routes = {};
 
@@ -7,16 +9,15 @@ routes.publish = function (router) {
 
     router.get('/assess/:assessmentId', function (request, response) {
         var assessmentId = request.params.assessmentId;
-        assessmentData.get(assessmentId)
+        assessmentData
+            .get(assessmentId)
             .then(function (assessment) {
                 delete assessment.tests;
                 delete assessment.tips;
                 delete assessment.guides;
                 response.json(assessment);
             })
-            .catch(function (error) {
-                response.status(500).send(error.message);
-            });
+            .catch(HttpError.handle(response));
     });
 
     router.post('/assess/:assessmentId', function (request, response) {
