@@ -24,7 +24,7 @@ routes.publish = function (router) {
         var assessmentId = request.params.assessmentId;
         assessmentData.get(assessmentId)
             .then(function (assessment) {
-                var compilationUnits = request.body.compilationUnits;
+                var submittedCompilationUnits = request.body.submittedCompilationUnits;
                 var options = {
                     //url: 'http://localhost:5020/v1/',
                     url: 'http://54.171.154.216:5020/v1/',
@@ -32,7 +32,7 @@ routes.publish = function (router) {
                     body: [
                         JSON.stringify({
                             assessment: assessment,
-                            compilationUnits: compilationUnits
+                            submittedCompilationUnits: submittedCompilationUnits
                         })
                     ]
                 };
